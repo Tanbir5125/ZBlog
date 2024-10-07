@@ -29,14 +29,48 @@ app.post('/', (req, res) => {
         blogs.push(newBlog);
     }
 
-    res.render('index.ejs', {
-        blogs: blogs,
-    });
+    res.redirect('/');
 });
 
 app.get('/write-a-blog', (req, res) => {
     res.render('writeBlog.ejs');
 });
+
+app.get('/edit-blog/:id', (req, res) => {
+    const blogId = req.params.id;
+    const blog = blogs[blogId];
+
+    if (blog) {
+        res.render('editBlog.ejs', { blog, blogId });
+    } else {
+        res.redirect('/');
+    }
+});
+
+app.post('/edit-blog/:id', (req, res) => {
+    const blogId = req.params.id;
+    const updatedBlog = {
+        title: req.body.title,
+        author: req.body.author,
+        content: req.body.content,
+    };
+
+    if (blogs[blogId]) {
+        blogs[blogId] = updatedBlog;
+    }
+
+    res.redirect('/');
+});
+
+app.post('/delete-blog/:id',(req,res)=>{
+    const blogId = req.params.id;
+
+    if(blogs[blogId]) {
+        blogs.splice(blogId, 1);
+    }
+
+    res.redirect('/');
+})
 
 app.listen(port, () => {
     console.log(`Server is running on port http://localhost:${port}/`);
