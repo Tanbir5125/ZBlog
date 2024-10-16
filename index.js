@@ -6,16 +6,22 @@ const port = 3000;
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static('public'));
+app.set("view engine", "ejs");
 
 let blogs = [];
 
 app.get('/', (req, res) => {
-    res.render('index.ejs', {
-        blogs: blogs,
-    });
+    res.render('index.ejs');
 });
 
-app.post('/', (req, res) => {
+
+app.get('/showBlogs', (req, res) => {
+    res.render('showBlogs.ejs', {
+        blogs: blogs,
+    });
+})
+
+app.post('/showBlogs', (req, res) => {
     const newBlog = {
         title: req.body.title,
         content: req.body.content,
@@ -29,7 +35,11 @@ app.post('/', (req, res) => {
         blogs.push(newBlog);
     }
 
-    res.redirect('/');
+    res.redirect('/showBlogs');
+});
+
+app.get('/', (req, res) => {
+    res.redirect('/showBlogs');
 });
 
 app.get('/write-a-blog', (req, res) => {
@@ -62,10 +72,10 @@ app.post('/edit-blog/:id', (req, res) => {
     res.redirect('/');
 });
 
-app.post('/delete-blog/:id',(req,res)=>{
+app.post('/delete-blog/:id', (req, res) => {
     const blogId = req.params.id;
 
-    if(blogs[blogId]) {
+    if (blogs[blogId]) {
         blogs.splice(blogId, 1);
     }
 
