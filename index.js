@@ -6,12 +6,13 @@ const port = 3000;
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static('public'));
+app.set("view engine", "ejs");
 
 let blogs = [];
 
 app.get('/', (req, res) => {
-    res.render('index.ejs', {
-        blogs: blogs,
+    res.render('index', {
+        blogs,
     });
 });
 
@@ -33,7 +34,7 @@ app.post('/', (req, res) => {
 });
 
 app.get('/write-a-blog', (req, res) => {
-    res.render('writeBlog.ejs');
+    res.render('writeBlog');
 });
 
 app.get('/edit-blog/:id', (req, res) => {
@@ -41,7 +42,7 @@ app.get('/edit-blog/:id', (req, res) => {
     const blog = blogs[blogId];
 
     if (blog) {
-        res.render('editBlog.ejs', { blog, blogId });
+        res.render('editBlog', { blog, blogId });
     } else {
         res.redirect('/');
     }
