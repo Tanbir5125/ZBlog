@@ -18,6 +18,28 @@ body {
     overflow-y: auto;
 }
 
+.container ul {
+    padding: 0;
+    list-style-type: none;
+}
+
+.container ul li {
+    margin-bottom: 15px;
+    /* Add space between list items */
+}
+
+.container ul li a.title {
+    text-decoration: none;
+    color: #3498db;
+    font-weight: bold;
+    font-size: 1.2rem;
+    transition: color 0.3s;
+}
+
+.container ul li a.title:hover {
+    color: #2980b9;
+}
+
 .blog-entry {
     border-bottom: 1px solid #ccc;
     padding-bottom: 15px;
@@ -69,19 +91,6 @@ body {
 .edit:hover {
     background-color: #2980b9;
     color: #fff;
-}
-
-.title {
-    font-size: 1.2rem;
-    color: #333;
-    margin-bottom: 20px;
-    font-weight: bold;
-    transition: all 0.3s ease;
-}
-
-.title:hover {
-    color: blue;
-    text-decoration: underline;
 }
 
 .blogDisplay {
