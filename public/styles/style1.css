@@ -42,7 +42,7 @@ body {
     line-height: 1.5;
 }
 
-.container a {
+.blog-write {
     display: inline-block;
     margin-top: 20px;
     padding: 10px 15px;
@@ -53,21 +53,123 @@ body {
     transition: background-color 0.3s;
 }
 
-.container a:hover {
-    background-color: #555;
-}
-
-button[type="submit"] {
-    background-color: #e74c3c;
-    color: white;
-    border: none;
+.home,
+.edit {
+    display: inline-block;
     padding: 10px 15px;
+    background-color: #3498db;
+    color: white;
+    text-decoration: none;
     border-radius: 4px;
-    cursor: pointer;
-    transition: background-color 0.3s;
-    margin-left: 10px;
+    margin-right: 10px;
+    transition: background-color 0.3s, color 0.3s;
 }
 
-button[type="submit"]:hover {
+.home:hover,
+.edit:hover {
+    background-color: #2980b9;
+    color: #fff;
+}
+
+.title {
+    font-size: 1.2rem;
+    color: #333;
+    margin-bottom: 20px;
+    font-weight: bold;
+    transition: all 0.3s ease;
+}
+
+.title:hover {
+    color: blue;
+    text-decoration: underline;
+}
+
+.blogDisplay {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    padding: 20px;
+    background-color: rgba(255, 255, 255, 0.95);
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 800px;
+    margin: 20px auto;
+}
+
+.blogDisplay h1 {
+    font-size: 2rem;
+    color: #333;
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+.blogDisplay p {
+    font-size: 1rem;
+    color: #666;
+    line-height: 1.6;
+    text-align: justify;
+    margin-bottom: 15px;
+}
+
+.blogDisplay a {
+    display: inline-block;
+    padding: 10px 15px;
+    background-color: #3498db;
+    color: white;
+    text-decoration: none;
+    border-radius: 4px;
+    margin: 5px;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.blogDisplay a:hover {
+    background-color: #2980b9;
+    color: #fff;
+}
+
+.button-group {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.blogDisplay a {
+    display: inline-block;
+    padding: 10px 15px;
+    background-color: #3498db;
+    color: white;
+    text-decoration: none;
+    border-radius: 4px;
+    transition: background-color 0.3s, color 0.3s;
+    cursor: pointer;
+}
+
+.blogDisplay a:hover {
+    background-color: #2980b9;
+    color: #fff;
+}
+
+form[action^="/delete-blog/"] input[type="submit"] {
+    display: inline-block;
+    background-color: #e74c3c;
+    padding: 10px 15px;
+    color: white;
+    border-radius: 4px;
+    transition: background-color 0.3s, color 0.3s;
+    cursor: pointer;
+    border: none;
+    text-decoration: none;
+}
+
+form[action^="/delete-blog/"] input[type="submit"]:hover {
     background-color: #c0392b;
+    color: white;
+}
+
+.container ul li {
+    list-style: circle;
 }

@@ -11,26 +11,37 @@ app.set("view engine", "ejs");
 let blogs = [];
 
 app.get('/', (req, res) => {
-    res.render('index', {
+    res.render('index.ejs',{
         blogs,
     });
 });
 
-app.post('/', (req, res) => {
+app.post('/showBlogs', (req, res) => {
+    const title = req.body.title;
+    const author = req.body.author;
+    const content = req.body.content;
+
     const newBlog = {
-        title: req.body.title,
-        content: req.body.content,
-        author: req.body.author,
+        title,
+        author,
+        content,
+        id: blogs.length,
     };
 
-    // Check if the blog already exists
-    const existingBlog = blogs.find(blog => blog.title === newBlog.title);
-
-    if (!existingBlog) {
-        blogs.push(newBlog);
-    }
+    blogs.push(newBlog);
 
     res.redirect('/');
+})
+
+app.get('/showBlogs/:id', (req, res) => {
+    const blogId = req.params.id;
+    const blog = blogs[blogId];
+
+    if (blog) {
+        res.render('showBlogs.ejs', { blog, blogId});
+    } else {
+        res.redirect('/');
+    }
 });
 
 app.get('/write-a-blog', (req, res) => {
@@ -54,6 +65,7 @@ app.post('/edit-blog/:id', (req, res) => {
         title: req.body.title,
         author: req.body.author,
         content: req.body.content,
+        id: blogId,
     };
 
     if (blogs[blogId]) {
@@ -63,11 +75,12 @@ app.post('/edit-blog/:id', (req, res) => {
     res.redirect('/');
 });
 
-app.post('/delete-blog/:id',(req,res)=>{
+app.post('/delete-blog/:id', (req, res) => {
     const blogId = req.params.id;
 
-    if(blogs[blogId]) {
+    if (blogs[blogId]) {
         blogs.splice(blogId, 1);
+        blogs = blogs.map((blog, index) => ({...blog, id: index }));
     }
 
     res.redirect('/');
