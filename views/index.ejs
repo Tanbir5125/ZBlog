@@ -1,7 +1,14 @@
 <%- include("header1.ejs") %>
 
 <div class="container">
-  <a href="/write-a-blog">Write a New Blog</a>
+  <ul>
+    <% blogs.forEach(function(blog, index) { %>
+    <li>
+      <a href="/showBlogs/<%= index %>" class="title"><%= blog.title %></a>
+    </li>
+    <% }); %>
+  </ul>
+  <a href="/write-a-blog" class="blog-write">Write a New Blog</a>
 </div>
 
 <%- include("footer.ejs") %>

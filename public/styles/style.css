@@ -38,7 +38,8 @@ body {
 }
 
 .blog-write input[type="submit"],
-.blog-write input[type="reset"] {
+.blog-write input[type="reset"]
+{
     width: 48%;
     padding: 10px;
     margin-top: 15px;
